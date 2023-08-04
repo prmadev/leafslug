@@ -97,5 +97,4 @@ jobs:
         run: |
           cargo install --locked cargo-audit || true
       - run: |
-          rm -rf ~/.cargo/advisory-db
           rustup run nightly cargo audit
