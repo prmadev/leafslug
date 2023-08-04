@@ -46,27 +46,6 @@ jobs:
           os: ubuntu-latest
           rust: nightly
           target: x86_64-unknown-linux-musl
-        - build: nightly-32
-          os: ubuntu-latest
-          rust: nightly
-          target: i686-unknown-linux-gnu
-        - build: nightly-mips
-          os: ubuntu-latest
-          rust: nightly
-          target: mips64-unknown-linux-gnuabi64
-        - build: nightly-arm
-          os: ubuntu-latest
-          rust: nightly
-          target: arm-unknown-linux-gnueabihf
-        - build: macos
-          os: macos-latest
-          rust: nightly
-        - build: win-msvc
-          os: windows-2022
-          rust: nightly
-        - build: win-gnu
-          os: windows-2022
-          rust: nightly-x86_64-gnu
 
     steps:
       - uses: actions/checkout@v1
