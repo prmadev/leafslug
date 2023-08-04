@@ -9,7 +9,6 @@ on:
 jobs:
   security_audit:
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
         build:
@@ -71,6 +70,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - uses: actions-rs/audit-check@v1
+      - uses: actions-rs/audit-check@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
