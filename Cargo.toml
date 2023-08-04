@@ -1,0 +1,32 @@
+[package]
+name = "leafslug"
+description = "Leafslug is an application to help happy hippies find food."
+version = "0.1.0"
+edition = "2021"
+authors = ["Perma <prma.dev@protonmail.com>", "Pegah <pegah760.pk@gmail.com>"]
+homepage = "https://github.com/prmadev/leafslug"
+repository = "https://github.com/prmadev/leafslug"
+license = "MPL-2.0"
+readme = "README.md"
+
+categories = ["command-line-utilities"]
+keywords = ["vegan", "vegetarian", "local-first"]
+
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+path = "src/main.rs"
+name = "kyushu"
+
+[package.metadata.git-cliff.git]
+conventional_commits = true
+split_commits = true
+filter_unconventional = true
+
+[dependencies]
+
+[profile.release]
+strip = true      # Automatically strip symbols from the binary.
+lto = true
+codegen-units = 1
