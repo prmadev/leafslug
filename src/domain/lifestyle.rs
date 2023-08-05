@@ -2,6 +2,7 @@
 
 use super::restrictions::Restriction;
 
+#[derive(serde::Deserialize, serde::Serialize, Clone, PartialEq, Eq, Debug)]
 pub struct Lifestyle {
     pub id: i128,
     pub name: String,

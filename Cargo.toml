@@ -25,6 +25,7 @@ split_commits = true
 filter_unconventional = true
 
 [dependencies]
+serde = { version = "1.0.181", features = ["derive"] }
 
 [profile.release]
 strip = true      # Automatically strip symbols from the binary.
