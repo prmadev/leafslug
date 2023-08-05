@@ -11,13 +11,10 @@ env:
   CARGO_NET_RETRY: 10
   CARGO_TERM_COLOR: always
   RUSTUP_MAX_RETRIES: 10
-
 jobs:
   cargo-fmt:
     name: "cargo fmt"
-
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
         build:
@@ -45,5 +42,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: "Install Rust toolchain"
+
         run: rustup component add rustfmt
       - run: cargo fmt --all --check
