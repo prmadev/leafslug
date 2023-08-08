@@ -10,6 +10,7 @@ env:
   CARGO_NET_RETRY: 10
   CARGO_TERM_COLOR: always
   RUSTUP_MAX_RETRIES: 10
+  SQLX_OFFLINE: 1
 jobs:
   cargo-clippy:
     name: "cargo clippy"

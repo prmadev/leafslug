@@ -40,6 +40,8 @@
               DATABASE_USER = postgres_user;
               SERVER_PORT = toString server-internal-port;
               DEPLOY_ENV = environment;
+
+              SQLX_OFFLINE_DIR = "./.sqlx";
             };
 
             languages = {

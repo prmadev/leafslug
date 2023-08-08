@@ -64,11 +64,11 @@ impl CRUD<Ingredient> for PgPool {
             sqlx::query_as!(
                 Ingredient,
                 r#"
-                UPDATE ingredients
-                SET name = $2
-                WHERE id = $1
-                RETURNING id, name
-            "#,
+                    UPDATE ingredients
+                    SET name = $2
+                    WHERE id = $1
+                    RETURNING id, name
+                "#,
                 new.id,
                 new.name
             )

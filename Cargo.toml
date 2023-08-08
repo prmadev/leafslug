@@ -30,7 +30,7 @@ serde = { version = "1.0.183", features = ["derive"] }
 sqlx = { version = "0.7.1", default-features = false, features = ["runtime-tokio-rustls", "macros", "postgres", "time"] }
 thiserror = "1.0.44"
 time = { version = "0.3.25", features = ["local-offset"] }
-tokio = { version = "1.29.1", features = ["rt-multi-thread", "test-util", "tokio-macros"] }
+tokio = { version = "1.29.1", features = ["rt-multi-thread", "test-util"] }
 tokio-macros = "2.1.0"
 tracing = "0.1.37"
 
@@ -39,5 +39,7 @@ sqlx = { version = "0.7.1", default-features = false, features = ["runtime-tokio
 [profile.release]
 strip = true      # Automatically strip symbols from the binary.
 lto = true
-# codegen-units = 1
+codegen-units = 1
 
+[profile.dev.package.sqlx-macros]
+opt-level = 3

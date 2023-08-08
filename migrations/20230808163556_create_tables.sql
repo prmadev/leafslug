@@ -1,3 +1,4 @@
+-- Add migration script here
 create table ingredients (
     id serial not null,
     primary key (id),

@@ -23,6 +23,7 @@ const LESLY: &str = "\n
 #[tokio_macros::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("{LESLY}");
+
     let db_user = var_os("DATABASE_USER")
         .ok_or("could not get DATABASE_USER")?
         .into_string()
@@ -42,6 +43,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .ok_or("could not get DATABASE_NAME")?
         .into_string()
         .map_err(|_e| "could not convert to string")?;
+
     let db_port = var_os("DATABASE_PORT")
         .ok_or("could not get DATABASE_PORT")?
         .into_string()
