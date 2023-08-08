@@ -6,7 +6,7 @@ use super::{lifestyle::Lifestyle, restrictions::Restriction};
 #[derive(serde::Deserialize, serde::Serialize, Clone, PartialEq, Eq, Debug)]
 pub struct Food {
     /// Id is the machin friendly identification of type food
-    pub id: i128,
+    pub id: Option<i32>,
     /// Names may overlap, but we should avoid that as much as possible.
     pub name: String,
     /// This is the list of incompatibilies with different lifestyles

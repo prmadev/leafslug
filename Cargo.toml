@@ -17,7 +17,7 @@ path = "src/lib.rs"
 
 [[bin]]
 path = "src/main.rs"
-name = "kyushu"
+name = "leafslug"
 
 [package.metadata.git-cliff.git]
 conventional_commits = true
@@ -25,9 +25,19 @@ split_commits = true
 filter_unconventional = true
 
 [dependencies]
-serde = { version = "1.0.181", features = ["derive"] }
+async-trait = "0.1.72"
+serde = { version = "1.0.183", features = ["derive"] }
+sqlx = { version = "0.7.1", default-features = false, features = ["runtime-tokio-rustls", "macros", "postgres", "time"] }
+thiserror = "1.0.44"
+time = { version = "0.3.25", features = ["local-offset"] }
+tokio = { version = "1.29.1", features = ["rt-multi-thread", "test-util", "tokio-macros"] }
+tokio-macros = "2.1.0"
+tracing = "0.1.37"
 
+[dev-dependencies]
+sqlx = { version = "0.7.1", default-features = false, features = ["runtime-tokio-rustls", "macros", "postgres", "time", "migrate"] }
 [profile.release]
 strip = true      # Automatically strip symbols from the binary.
 lto = true
-codegen-units = 1
+# codegen-units = 1
+

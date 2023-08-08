@@ -35,3 +35,6 @@
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
 pub mod domain;
+pub use domain::*;
+pub mod persistence;
+pub use persistence::*;

@@ -7,7 +7,7 @@ use super::restrictions::Restriction;
 ///
 pub struct Lifestyle {
     /// Id is the machin friendly identification of type
-    pub id: i128,
+    pub id: Option<i32>,
     /// Names may overlap, but we should avoid that as much as possible.
     pub name: String,
     /// list of restrictions that are carried out by this lifestyle choice
