@@ -2,6 +2,7 @@
 
 use std::env::var_os;
 
+/// Lesly is a cute leafslug
 const LESLY: &str = "\n
 
                  ▓  ▓    ▓▓▓    ▓   ▓  ▓▓    ▓▓
