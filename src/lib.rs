@@ -32,6 +32,7 @@
     clippy::implicit_clone,
     clippy::map_clone
 )]
+#![allow(clippy::multiple_crate_versions)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
 pub mod domain;
