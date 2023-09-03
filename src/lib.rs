@@ -1,7 +1,7 @@
 //! This is leafslug
 
 #![forbid(unsafe_code)]
-#![deny(missing_docs)]
+#![warn(missing_docs)]
 #![deny(clippy::expect_used)]
 #![deny(clippy::unwrap_used)]
 #![deny(clippy::indexing_slicing)]
@@ -9,18 +9,23 @@
 #![warn(
     rust_2018_idioms,
     clippy::pedantic,
+    clippy::perf,
     clippy::cargo,
     clippy::clone_on_ref_ptr,
+    clippy::alloc_instead_of_core,
     clippy::default_numeric_fallback,
     clippy::string_to_string,
     clippy::unnecessary_self_imports,
     clippy::str_to_string,
     clippy::same_name_method,
     clippy::rc_buffer,
+    clippy::as_ptr_cast_mut,
+    clippy::as_underscore,
     clippy::panic_in_result_fn,
     clippy::multiple_inherent_impl,
     clippy::map_err_ignore,
     clippy::if_then_some_else_none,
+    clippy::clone_on_ref_ptr,
     clippy::empty_structs_with_brackets,
     clippy::useless_let_if_seq,
     clippy::use_self,
@@ -39,3 +44,5 @@ pub mod domain;
 pub use domain::*;
 pub mod persistence;
 pub use persistence::*;
+pub mod http;
+pub use http::*;
