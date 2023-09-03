@@ -1,6 +1,6 @@
 //! health check information
 
-use axum::{response::IntoResponse, routing::get, Json, Router};
+use axum::{http::status, response::IntoResponse, routing::get, Json, Router};
 use serde::{Deserialize, Serialize};
 use tracing::{instrument, Level};
 
@@ -10,9 +10,12 @@ pub async fn health_check_simple() -> impl IntoResponse {
     tracing::event!(Level::INFO, "checked health successfully");
 
     println!("checked health successfully");
-    Json(SimpleResp {
-        message: " I am up!".to_owned(),
-    })
+    (
+        status::StatusCode::OK,
+        Json(SimpleResp {
+            message: " I am up!".to_owned(),
+        }),
+    )
 }
 
 /// response

@@ -1,8 +1,8 @@
 //! Leafslugs are cute.
 
-use axum::Router;
+use axum::{middleware, Router};
 
-use leafslug::{conf, health_check, http, merger};
+use leafslug::{conf, health_check, http, main_response_mapper, merger};
 
 use tokio::select;
 use tracing::info;
@@ -72,7 +72,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let rest_handler = http::serve(
         configurations.rest.host,
         configurations.rest.port,
-        merger(vec![api_v1_routes]),
+        merger(vec![api_v1_routes]).layer(middleware::map_response(main_response_mapper)),
     );
 
     //

@@ -1,6 +1,6 @@
 use axum::http::status;
 use leafslug::health_check::SimpleResp;
-use reqwest::{Client, Url};
+use reqwest::{Client, Method, Url};
 use serde::Deserialize;
 
 #[tokio::test]
@@ -29,7 +29,7 @@ async fn print_response_with_test<T>(
 }
 
 async fn send_get_api(addr: Url) -> reqwest::Response {
-    let c = clint().get(addr);
+    let c = clint().request(Method::GET, addr);
     c.send().await.expect("could not send request")
 }
 

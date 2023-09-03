@@ -1,6 +1,6 @@
 //! server component
 
-use axum::Router;
+use axum::{response::Response, Router};
 use thiserror::Error;
 
 pub mod routes;
@@ -52,4 +52,11 @@ pub enum Error {
     /// Error related to the channel made for handling the shutdown gracefully.
     #[error("somehting internal broke when handling errors gracefully on the sender side")]
     SenderFailed,
+}
+
+/// A response mapper.
+pub async fn main_response_mapper(res: Response) -> Response {
+    tracing::info!("response mapper: {res:#?}");
+
+    res
 }
