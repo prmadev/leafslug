@@ -46,3 +46,5 @@ pub mod persistence;
 pub use persistence::*;
 pub mod http;
 pub use http::*;
+pub mod conf;
+pub use conf::*;

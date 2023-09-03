@@ -1,18 +1,22 @@
 //! server component
 
 use axum::Router;
-use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 use thiserror::Error;
 
 pub mod routes;
 pub use routes::*;
 
 /// Runner for the REST server.
-pub async fn http_serve(app: Router) -> Result<(), ServerErr> {
-    let addr = SocketAddr::new(IpAddr::V4(Ipv4Addr::new(0, 0, 0, 0)), 8095);
+pub async fn http_serve(host: String, port: u16, app: Router) -> Result<(), ServerErr> {
+    // let addr = SocketAddr::new(IpAddr::V4(a));
 
-    let s = axum::Server::try_bind(&addr)
-        .map_err(|x| ServerErr::CouldNotBind(addr, x.message().to_string()))?
+    // let addr = url
+    let address = format!("{host}:{port}");
+    let addr = std::net::TcpListener::bind(&address)
+        .map_err(|x| ServerErr::CouldNotBind(address, x.to_string()))?;
+
+    let s = axum::Server::from_tcp(addr)
+        .map_err(|x| ServerErr::CouldNotConvertBinding(x.message().to_string()))?
         .serve(app.into_make_service());
     let (tx, rx) = tokio::sync::oneshot::channel::<()>();
 
@@ -32,7 +36,11 @@ pub async fn http_serve(app: Router) -> Result<(), ServerErr> {
 pub enum ServerErr {
     /// Error related to binding to sepcific address.
     #[error("could not bind to address {0}: {1}")]
-    CouldNotBind(SocketAddr, String),
+    CouldNotBind(String, String),
+
+    /// Error related to binding to sepcific address.
+    #[error("could not bind to address: {0}")]
+    CouldNotConvertBinding(String),
 
     /// Error related to the channel made for handling the shutdown gracefully.
     #[error("somehting internal broke when handling shutdown gracefully on the receiver side")]

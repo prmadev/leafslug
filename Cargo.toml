@@ -12,6 +12,9 @@ readme = "README.md"
 categories = ["command-line-utilities"]
 keywords = ["vegan", "vegetarian", "local-first"]
 
+[features]
+local = []
+
 [lib]
 path = "src/lib.rs"
 

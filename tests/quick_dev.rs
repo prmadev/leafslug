@@ -4,6 +4,7 @@ use reqwest::{Client, Url};
 use serde::Deserialize;
 
 #[tokio::test]
+#[cfg_attr(not(feature = "local"), ignore)] // needs the service to be running
 async fn quick_dev() {
     let c = send_get_api(at_api_v1("/health_check/simple")).await;
     println!("{}", at_api_v1("/health_check/simple"));
