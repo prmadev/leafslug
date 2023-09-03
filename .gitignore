@@ -3,4 +3,4 @@ devenv/
 .devenv/
 .pre-commit-config.yaml
 result/
-
+leafslug.toml

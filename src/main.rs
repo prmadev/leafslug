@@ -1,7 +1,12 @@
 //! Leafslugs are cute.
 
 use axum::Router;
+use figment::{
+    providers::{Env, Format, Toml},
+    Figment,
+};
 use leafslug::{health_check::health_check_router, http, routes_merger};
+use serde::Deserialize;
 use tracing_bunyan_formatter::JsonStorageLayer;
 use tracing_subscriber::{prelude::__tracing_subscriber_SubscriberExt, Registry};
 
@@ -64,6 +69,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // let db_url = format!("postgres://{db_user}:{db_pass}@{db_address}:{db_port}/{db_name}");
     // _ = db_url;
+    println!("{:#?}", conf());
     tracing::info!("starting application");
     let api_v1_routes = {
         let v1 = Router::new().nest("/v1", routes_merger(vec![health_check_router()]).await);
@@ -72,4 +78,26 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     http::http_serve(routes_merger(vec![api_v1_routes]).await).await?;
     Ok(())
+}
+fn conf() -> anyhow::Result<Config> {
+    let config: Config = Figment::new()
+        .join(Toml::file("leafslug.toml"))
+        .merge(Env::prefixed("LEAFSLUG_"))
+        .extract()?;
+
+    Ok(config)
+}
+
+#[derive(Deserialize, Debug)]
+struct DBConf {
+    database_name: String,
+    user: String,
+    pass: String,
+    host: String,
+    port: u32,
+}
+
+#[derive(Deserialize, Debug)]
+struct Config {
+    db: DBConf,
 }
