@@ -30,8 +30,7 @@ async fn print_response_with_test<T>(
 
 async fn send_get_api(addr: Url) -> reqwest::Response {
     let c = clint().get(addr);
-    let res = c.send().await.expect("could not send request");
-    res
+    c.send().await.expect("could not send request")
 }
 
 fn at_api_v1(addr: &str) -> Url {
