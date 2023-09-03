@@ -64,9 +64,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // let db_url = format!("postgres://{db_user}:{db_pass}@{db_address}:{db_port}/{db_name}");
     // _ = db_url;
-
-    // let app = Router::new().route("/health_check", get(|| async { "hello, world!" }));
-
+    tracing::info!("starting application");
     let api_v1_routes = {
         let v1 = Router::new().nest("/v1", routes_merger(vec![health_check_router()]).await);
         Router::new().nest("/api", v1)
