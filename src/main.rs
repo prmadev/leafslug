@@ -2,7 +2,7 @@
 
 use axum::Router;
 
-use leafslug::{conf, health_check::health_check_router, http, routes_merger};
+use leafslug::{conf, health_check, http, merger};
 
 use tokio::select;
 use tracing::info;
@@ -61,7 +61,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     //
 
     let api_v1_routes = {
-        let v1 = Router::new().nest("/v1", routes_merger(vec![health_check_router()]).await);
+        let v1 = Router::new().nest("/v1", merger(vec![health_check::router()]));
         Router::new().nest("/api", v1)
     };
 
@@ -69,10 +69,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // Serving REST
     //
 
-    let rest_handler = http::http_serve(
+    let rest_handler = http::serve(
         configurations.rest.host,
         configurations.rest.port,
-        routes_merger(vec![api_v1_routes]).await,
+        merger(vec![api_v1_routes]),
     );
 
     //

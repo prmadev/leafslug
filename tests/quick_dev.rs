@@ -1,5 +1,5 @@
 use axum::http::status;
-use leafslug::health_check::HealthCheckSimpleResp;
+use leafslug::health_check::SimpleResp;
 use reqwest::{Client, Url};
 use serde::Deserialize;
 
@@ -8,7 +8,7 @@ use serde::Deserialize;
 async fn quick_dev() {
     let c = send_get_api(at_api_v1("/health_check/simple")).await;
     println!("{}", at_api_v1("/health_check/simple"));
-    print_response_with_test::<HealthCheckSimpleResp>(c, |t, s| {
+    print_response_with_test::<SimpleResp>(c, |t, s| {
         assert_eq!(" I am up!".to_owned(), t.message);
         assert_eq!(s, status::StatusCode::OK);
     })

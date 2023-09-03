@@ -10,20 +10,20 @@ pub async fn health_check_simple() -> impl IntoResponse {
     tracing::event!(Level::INFO, "checked health successfully");
 
     println!("checked health successfully");
-    Json(HealthCheckSimpleResp {
+    Json(SimpleResp {
         message: " I am up!".to_owned(),
     })
 }
 
 /// response
 #[derive(Debug, Clone, Deserialize, Serialize)]
-pub struct HealthCheckSimpleResp {
+pub struct SimpleResp {
     /// a mock message
     pub message: String,
 }
 
-/// router of /health_check/... end points
-pub fn health_check_router() -> Router {
+/// router of health check end points
+pub fn router() -> Router {
     Router::new().nest(
         "/health_check",
         Router::new().route("/simple", get(health_check_simple)),

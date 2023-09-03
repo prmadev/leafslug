@@ -6,7 +6,12 @@ use figment::{
 };
 use serde::Deserialize;
 
-/// parses and retrieves configuration
+/// Parses and retrieves configuration.
+///
+/// # Errors
+///
+/// This function will return an error if
+/// it fails to extract one or more information from the given sources.
 pub fn conf() -> anyhow::Result<Config> {
     let config: Config = Figment::new()
         .join(Toml::file("leafslug.toml"))
@@ -18,7 +23,7 @@ pub fn conf() -> anyhow::Result<Config> {
 
 /// configuration related to db
 #[derive(Deserialize, Debug)]
-pub struct DBConf {
+pub struct DB {
     /// name of the databse
     pub name: String,
     /// name of the database user
@@ -33,7 +38,7 @@ pub struct DBConf {
 
 /// configurations related to the main rest service
 #[derive(Deserialize, Debug)]
-pub struct RESTConf {
+pub struct REST {
     /// Host to use
     /// It should look like this: `0.0.0.0`
     pub host: String,
@@ -45,7 +50,7 @@ pub struct RESTConf {
 /// configuration structure
 pub struct Config {
     /// configurations related to db
-    pub db: DBConf,
+    pub db: DB,
     /// configurations related to REST server
-    pub rest: RESTConf,
+    pub rest: REST,
 }

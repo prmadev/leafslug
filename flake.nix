@@ -88,9 +88,9 @@
               image-build.exec = "podman build --rm -t ${name}:alpha . --no-cache";
               image-run.exec = "podman run -d -p ${toString server-internal-port}:${toString server-image-port} --name ${name} ${name}:alpha";
               image-remove.exec = "podman container rm ${name}";
-              tr.exec = "exa --tree  --git-ignore --icons --group-directories-first  --all  --long --git --no-permissions --no-user --no-filesize --no-time";
-              create-postgres.exec = "podman run -d  --name ${postgres-container_name} -e POSTGRES_HOST_AUTH_METHOD=${postgres_host_auth_method} -e  POSTGRES_USER=${postgres_user} -e POSTGRES_PASSWORD=${postgres_password} -e POSTGRES_DB=${postgres_database} -p ${postgres_address}:${toString postgres_port}:5432 ${postgres_image_name}";
-              open-postgres-shell.exec = "podman exec -it ${postgres-container_name} psql -U ${postgres_user}  -d ${postgres_database}";
+              postgres-create.exec = "podman run -d  --name ${postgres-container_name} -e POSTGRES_HOST_AUTH_METHOD=${postgres_host_auth_method} -e  POSTGRES_USER=${postgres_user} -e POSTGRES_PASSWORD=${postgres_password} -e POSTGRES_DB=${postgres_database} -p ${postgres_address}:${toString postgres_port}:5432 ${postgres_image_name}";
+              postgres-run.exec = "podman container start ${postgres-container_name}";
+              postgres-open--shell.exec = "podman exec -it ${postgres-container_name} psql -U ${postgres_user}  -d ${postgres_database}";
             };
           }
         )
