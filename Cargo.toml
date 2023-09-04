@@ -1,7 +1,7 @@
 [package]
 name = "leafslug"
 description = "Leafslug is an application to help happy hippies find food."
-version = "0.1.5"
+version = "0.2.0"
 edition = "2021"
 authors = ["Perma <prma.dev@protonmail.com>", "Pegah <pegah760.pk@gmail.com>"]
 homepage = "https://github.com/prmadev/leafslug"
