@@ -6,13 +6,13 @@ use tracing::{instrument, Level};
 
 /// Simple health checker.
 #[instrument(name = "Checking health")]
-pub async fn health_check_simple() -> impl IntoResponse {
+pub async fn handler_simple() -> impl IntoResponse {
     tracing::event!(Level::INFO, "checked health successfully");
 
     println!("checked health successfully");
     (
         status::StatusCode::OK,
-        Json(SimpleResp {
+        Json(Response {
             message: " I am up!".to_owned(),
         }),
     )
@@ -20,7 +20,7 @@ pub async fn health_check_simple() -> impl IntoResponse {
 
 /// response
 #[derive(Debug, Clone, Deserialize, Serialize)]
-pub struct SimpleResp {
+pub struct Response {
     /// a mock message
     pub message: String,
 }
@@ -29,6 +29,6 @@ pub struct SimpleResp {
 pub fn router() -> Router {
     Router::new().nest(
         "/health_check",
-        Router::new().route("/simple", get(health_check_simple)),
+        Router::new().route("/simple", get(handler_simple)),
     )
 }

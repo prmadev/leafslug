@@ -7,6 +7,8 @@
 #![deny(clippy::indexing_slicing)]
 #![deny(clippy::panic)]
 #![warn(
+    missing_debug_implementations,
+    missing_copy_implementations,
     rust_2018_idioms,
     clippy::pedantic,
     clippy::perf,
@@ -44,7 +46,7 @@ pub mod domain;
 pub use domain::*;
 pub mod persistence;
 pub use persistence::*;
-pub mod http;
-pub use http::*;
+pub mod web;
+pub use web::*;
 pub mod conf;
 pub use conf::*;

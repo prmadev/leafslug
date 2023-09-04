@@ -5,6 +5,7 @@ use thiserror::Error;
 
 pub mod routes;
 pub use routes::*;
+pub mod error;
 
 /// Runner for the REST server.
 ///
@@ -55,6 +56,7 @@ pub enum Error {
 }
 
 /// A response mapper.
+#[allow(clippy::unused_async)] // the trait definition needs async. Unless keyword generics come, I think we will need this.
 pub async fn main_response_mapper(res: Response) -> Response {
     tracing::info!("response mapper: {res:#?}");
 

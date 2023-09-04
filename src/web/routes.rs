@@ -1,5 +1,6 @@
 //! http routes
 pub mod health_check;
+pub mod login;
 use axum::Router;
 
 /// a function that merges a list routes into one
